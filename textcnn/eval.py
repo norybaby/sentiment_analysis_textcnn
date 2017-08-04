@@ -19,7 +19,7 @@ tf.flags.DEFINE_string("w2v_file", "../data/vectors.bin", "w2v_file path")
 
 # Eval Parameters
 tf.flags.DEFINE_integer("batch_size", 64, "Batch Size (default: 64)")
-tf.flags.DEFINE_string("checkpoint_dir", "../runs/1501842714/checkpoints/", "Checkpoint directory from training run")
+tf.flags.DEFINE_string("checkpoint_dir", "./runs/1501842714/checkpoints/", "Checkpoint directory from training run")
 tf.flags.DEFINE_boolean("eval_train", True, "Evaluate on all training data")
 
 # Misc Parameters
@@ -76,7 +76,7 @@ def eval(w2v_model):
             # Tensors we want to evaluate
             predictions = graph.get_operation_by_name("output/predictions").outputs[0]
 
-            x_test, y_test = load_data(w2v_model,600)
+            x_test, y_test = load_data(w2v_model,1290)
             # Generate batches for one epoch
             batches = data_helpers.batch_iter(list(x_test), FLAGS.batch_size, 1, shuffle=False)
 
@@ -84,7 +84,7 @@ def eval(w2v_model):
             all_predictions = []
 
             for x_test_batch in batches:
-                batch_predictions = sess.run([predictions], {input_x: x_test_batch, dropout_keep_prob: 1.0})
+                batch_predictions = sess.run(predictions, {input_x: x_test_batch, dropout_keep_prob: 1.0})
                 all_predictions = np.concatenate([all_predictions, batch_predictions])
 
     # Print accuracy if y_test is defined
@@ -103,7 +103,5 @@ def eval(w2v_model):
 
 
 if __name__ == "__main__":
-    import word2vec
-    w2v_model = word2vec.load('../data/vectors.bin')
-
-    eval(w2v_model)
+    w2v_wr = data_helpers.w2v_wrapper(FLAGS.w2v_file)
+    eval(w2v_wr.model)
