@@ -1,6 +1,6 @@
 # sentiment_analysis_textcnn
 基于tensorflow 实现的用textcnn方法做情感分析的项目，有数据，可以直接跑。
-===
+---
 <br /> <br /> 
 环境要求：
 ---
@@ -19,4 +19,4 @@ tensorflow  1.x
 <br /> <br /> 
  
 如有问题欢迎讨论 xiuyunchen@126.com
----
+
