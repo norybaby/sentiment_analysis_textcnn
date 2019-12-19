@@ -14,9 +14,9 @@ tensorflow  1.x
 运行验证：python eval.py<br /> 
  
 
- ![image](https://github.com/norybaby/sentiment_analysis_textcnn/blob/master/accuracy.png)
+ ![image](https://github.com/burette/sentiment_analysis_textcnn/blob/master/accuracy.png)
 
 <br /> <br /> 
  
-如有问题欢迎讨论 xiuyunchen@126.com
+如有问题欢迎讨论 lizhiwenbit@126.com
 

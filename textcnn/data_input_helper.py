@@ -123,7 +123,11 @@ def get_text_idx(text,vocab,max_document_length):
     text_array = np.zeros([len(text), max_document_length],dtype=np.int32)
 
     for i,x in  enumerate(text):
-        words = x.split(" ")
+        # 每一行最后一个词与'\n'在一起，因此需要先除去换行符，否则最后一个词无法正确对应到id，为unknown
+        words = x.replace("\n", "").split(" ")
+        # 另外观察发现，原来分割的方式每行第一个字符均为空，对应为unknown，因此在这里个人认为应该除去第一个空格
+        # eg: ['', '房间', '设施', '难以', '够得上', '五星级', '服务', '不错', '送', '水果']
+        words = words[1:]
         for j, w in enumerate(words):
             if w in vocab:
                 text_array[i, j] = vocab[w]
